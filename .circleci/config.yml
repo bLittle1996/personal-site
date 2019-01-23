@@ -1,9 +1,25 @@
-version: 2.1
+version: 2
 
 jobs:
-  build:
-    docker:
-      - image: circleci/node:4.8.2
-    steps:
-      - checkout
-      - run: echo "Hey there friend"
+  deploy-production:
+    run:
+      - ssh circleci@ben-littleton.com "cd webroot/html && sudo -u www-data git pull"
+      - echo "Deployed master branch to ben-littleton.com"
+  deploy-staging:
+    run:
+      - ssh circleci@ben-littleton.com "cd webroot/personal-site-staging && sudo -u www-data git pull"
+      - echo "Deployed staging branch to staging.ben-littleton.com"
+
+worksflows:
+  version: 2
+  deploy:
+    jobs:
+      - deploy-production:
+          filters:
+            branches:
+              only: master
+      - deploy-staging:
+          filters:
+            branches:
+              only: staging
+
