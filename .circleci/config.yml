@@ -2,15 +2,21 @@ version: 2
 
 jobs:
   deploy-production:
-    run:
-      - ssh circleci@ben-littleton.com "cd webroot/html && sudo -u www-data git pull"
-      - echo "Deployed master branch to ben-littleton.com"
+    machine:
+      enabled: true
+    steps:
+      - run:
+        name: Deploy Master to ben-littleton.com
+        - ssh circleci@ben-littleton.com "cd webroot/html && sudo -u www-data git pull"
   deploy-staging:
-    run:
-      - ssh circleci@ben-littleton.com "cd webroot/personal-site-staging && sudo -u www-data git pull"
-      - echo "Deployed staging branch to staging.ben-littleton.com"
+    machine:
+      enabled: true
+    steps:
+      - run:
+        name: Deploy Staging to staging.ben-littleton.com
+        - ssh circleci@ben-littleton.com "cd webroot/personal-site-staging && sudo -u www-data git pull"
 
-worksflows:
+workflows:
   version: 2
   deploy:
     jobs:
