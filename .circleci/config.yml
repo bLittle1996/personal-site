@@ -7,14 +7,16 @@ jobs:
     steps:
       - run:
         name: Deploy Master to ben-littleton.com
-        - ssh circleci@ben-littleton.com "cd webroot/html && sudo -u www-data git pull"
+        command: | 
+          ssh circleci@ben-littleton.com "cd webroot/html && sudo -u www-data git pull"
   deploy-staging:
     machine:
       enabled: true
     steps:
       - run:
         name: Deploy Staging to staging.ben-littleton.com
-        - ssh circleci@ben-littleton.com "cd webroot/personal-site-staging && sudo -u www-data git pull"
+        command: |
+         ssh circleci@ben-littleton.com "cd webroot/personal-site-staging && sudo -u www-data git pull"
 
 workflows:
   version: 2
