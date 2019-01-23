@@ -7,3 +7,9 @@ workflows:
   "Hello Workflow":
     jobs:
       - hello/hello-build
+      build:
+        docker:
+          - image: cricleci/node:4.8.2
+        steps:
+          - checkout
+          - run: echo "Hey there friend"
