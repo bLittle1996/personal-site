@@ -5,6 +5,7 @@ jobs:
     machine:
       enabled: true
     steps:
+      - checkout
       - run:
           name: Deploy Master to ben-littleton.com
           command: | 
@@ -13,6 +14,7 @@ jobs:
     machine:
       enabled: true
     steps:
+      - checkout
       - run:
           name: Deploy Staging to staging.ben-littleton.com
           command: |
